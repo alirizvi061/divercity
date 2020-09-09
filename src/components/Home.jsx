@@ -68,9 +68,6 @@ class Home extends Component {
                         <option value="skills">Skills</option> */}
                     {/* </select> */}
                     <input type="text" name="search" placeholder="location, job type, skills..." onChange={this.handleChange} />
-                    {/* <input type="text" placeholder="Job Type" />
-                    <input type="text" placeholder="Skills" /> */}
-                    {/* <input type="submit" /> */}
                 </form>
                 <div className="jobDescription">
                     {this.state.jobs.map((job, index) => {

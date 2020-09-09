@@ -24,3 +24,7 @@ body{
 .form{
   margin-top: 15px;
 }
+.loginContainer{
+  display: flex;
+  flex-direction: column;
+}
