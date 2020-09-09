@@ -8,6 +8,7 @@ class Home extends Component {
         super(props);
         this.state = {
             loading: true,
+            jobs: [],
             baseURL: "https://divercity-test.herokuapp.com/",
             method: "jobs"
         }
@@ -17,7 +18,11 @@ class Home extends Component {
         axios
             .get(this.state.baseURL + this.state.method)
             .then((res) => {
-                console.log(res)
+                this.setState({
+                    jobs: res.data.jobs,
+                    loading: false
+                })
+                // console.log(this.state.jobs)
             })
             .catch(error => {
                 console.log("empty input", error)
@@ -28,9 +33,16 @@ class Home extends Component {
         return (
             <div>
                 <h1>Home Page</h1>
-                <div>
-                    {this.state.loading ? <div>loading...</div> : <div>person...</div>}
-                </div>
+                {/* {console.log(this.state.jobs)} */}
+                {this.state.jobs.map((job, index) => {
+                    console.log(job)
+                    return (
+                        <div key={index}>
+                            <p>job = {job.id}</p>
+                        </div>
+
+                    )
+                })}
             </div>
         )
     }
