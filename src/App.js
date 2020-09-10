@@ -24,7 +24,7 @@ export default class App extends Component {
       username: "",
       password: "",
       name: "",
-      baseURL: "https://divercity-test.herokuapp.com/",
+      baseURL: process.env.DIVERCITY_BASE_URL,
       registerMethod: "register",
       loginMethod: "login",
       applyMethod: "jobs/2/apply"
@@ -118,7 +118,7 @@ export default class App extends Component {
       })
       .then((res) => {
         console.log(res)
-        if (res !== null && res.status === 200) {
+        if (res.status === 200) {
           let data = res.data.token
           this.setState({
             token: data,
@@ -204,6 +204,12 @@ export default class App extends Component {
                 handleApplySubmit={this.handleApplySubmit}
                 closeJobModal={this.closeJobModal}
                 isLoggedin={this.state.isLoggedin}
+                handleLoginChange={this.handleLoginChange}
+                handleLoginSubmit={this.handleLoginSubmit}
+                showSignUpModal={this.showSignUpModal}
+                showSignUp={this.state.showSignUp}
+                username={this.state.username}
+                password={this.state.password}
               /> : null
           }
           {
