@@ -15,8 +15,8 @@ export default class Jobmodal extends Component {
                             <>
                                 <h1>Apply</h1>
                                 <form onSubmit={(event) => { this.props.handleApplySubmit(event) }}>
-                                    <textarea placeholder="Tell us your motivation..." value={this.props.value} onChange={this.props.handleApplyChange}></textarea>
-                                    <textarea placeholder="Paste your cover letter here" value={this.props.value} onChange={this.props.handleApplyChange}></textarea>
+                                    <textarea placeholder="Tell us your motivation..." value={this.props.value} id="motivation" onChange={this.props.handleApplyChange}></textarea>
+                                    <textarea placeholder="Paste your cover letter here" value={this.props.value} id="cover_letter" onChange={this.props.handleApplyChange}></textarea>
                                     <input type="submit" />
                                 </form >
                             </>

@@ -24,6 +24,8 @@ export default class App extends Component {
       username: "",
       password: "",
       name: "",
+      motivation: "",
+      cover_letter: "",
       baseURL: "https://divercity-test.herokuapp.com/",
       registerMethod: "register",
       loginMethod: "login",
@@ -120,11 +122,15 @@ export default class App extends Component {
         console.log(res)
         if (res.status === 200) {
           let data = res.data.token
+          let username = res.config.data
+          console.log(username)
           this.setState({
+            username: username,
             token: data,
             isLoggedin: true,
           })
           localStorage.setItem('token', data)
+          localStorage.setItem('username', data)
         }
       })
       .catch((err) => {
@@ -136,6 +142,14 @@ export default class App extends Component {
     });
   }
 
+  componentDidMount() {
+    if (localStorage.getItem('token')) {
+      this.setState({
+        isLoggedin: true,
+        token: localStorage.getItem('token')
+      })
+    }
+  }
   //This function handles changes made to the job application form
   handleApplyChange = (event) => {
     this.setState({
@@ -150,20 +164,15 @@ export default class App extends Component {
     event.preventDefault();
     axios
       .post(this.state.baseURL + this.state.applyMethod, {
-        username: this.state.username,
-        password: this.state.password,
-        name: this.state.name,
+        motivation: this.state.motivation,
+        cover_letter: this.state.cover_letter,
+      }, {
+        headers: {
+          'Authorization': `${localStorage.getItem('token')}`
+        }
       })
       .then((res) => {
         console.log(res)
-        this.setState({
-          username: "",
-          password: "",
-          name: "",
-          isLoggedin: true,
-          userCreated: true
-        });
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -210,6 +219,8 @@ export default class App extends Component {
                 showSignUp={this.state.showSignUp}
                 username={this.state.username}
                 password={this.state.password}
+                motivation={this.state.motivation}
+                cover_letter={this.state.cover_letter}
               /> : null
           }
           {
