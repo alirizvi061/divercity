@@ -24,13 +24,12 @@ export default class App extends Component {
       username: "",
       password: "",
       name: "",
-      baseURL: process.env.DIVERCITY_BASE_URL,
+      baseURL: "https://divercity-test.herokuapp.com/",
       registerMethod: "register",
       loginMethod: "login",
       applyMethod: "jobs/2/apply"
     }
   }
-
   //Open signup modal
   showSignUpModal = () => {
     console.log("modal clicked")
@@ -73,6 +72,7 @@ export default class App extends Component {
   //This function sends a post requests that user makes using the sign up form
   //when successful this function allows user's information to be entered into the database
   handleRegisterSubmit = (event) => {
+    console.log(this.state.baseURL)
     event.preventDefault();
     axios
       .post(this.state.baseURL + this.state.registerMethod, {
