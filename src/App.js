@@ -5,11 +5,14 @@ import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Jobmodal from './components/Jobmodal';
 import Register from './components/Register';
-
 import './App.css';
 
 export default class App extends Component {
 
+  //Most of the state for the app is here.  
+  //We're tracking username, passwords, whether or not the user is loggedin... etc.
+  //This information will help manipulate the state of the app and
+  //and allow us to do some conditional rendering and make API calls
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +31,7 @@ export default class App extends Component {
     }
   }
 
+  //Open signup modal
   showSignUpModal = () => {
     console.log("modal clicked")
     this.setState({
@@ -35,6 +39,7 @@ export default class App extends Component {
     })
   }
 
+  //Close signup modal
   closeSignUpModal = () => {
     console.log("close modal clicked")
     this.setState({
@@ -42,6 +47,7 @@ export default class App extends Component {
     })
   }
 
+  //open Jobs modal to apply 
   showJobModal = () => {
     console.log("Job modal clicked")
     this.setState({
@@ -49,6 +55,7 @@ export default class App extends Component {
     })
   }
 
+  //close the jobs modal
   closeJobModal = () => {
     console.log("close Job modal clicked")
     this.setState({
@@ -56,12 +63,15 @@ export default class App extends Component {
     })
   }
 
+  //This function handles the changes made to the Signup form
   handleRegisterChange = (event) => {
     this.setState({
       [event.currentTarget.id]: event.currentTarget.value
     })
   }
 
+  //This function sends a post requests that user makes using the sign up form
+  //when successful this function allows user's information to be entered into the database
   handleRegisterSubmit = (event) => {
     event.preventDefault();
     axios
@@ -86,12 +96,19 @@ export default class App extends Component {
       });
   };
 
+  //This function handles changes made to the login form
   handleLoginChange = (event) => {
     this.setState({
       [event.currentTarget.id]: event.currentTarget.value
     })
   }
 
+  //This functino handles the submission of the user's login information
+  //if this is correct it allows the user to be able to use the 
+  //apply to job feature in the app
+  //it also saves the jsonwebtoken in the user's local storage
+  //so they can stay logged in if the page is refreshed and
+  //this token is sent back to the server when applying for jobs
   handleLoginSubmit = (event) => {
     event.preventDefault();
     axios
@@ -119,12 +136,16 @@ export default class App extends Component {
     });
   }
 
+  //This function handles changes made to the job application form
   handleApplyChange = (event) => {
     this.setState({
       [event.currentTarget.id]: event.currentTarget.value
     })
   }
 
+  //This function submits the user's job application
+  //it takes the jsonwebtoken back to the server to 
+  //authenticate the user
   handleApplySubmit = (event) => {
     event.preventDefault();
     axios
@@ -149,6 +170,9 @@ export default class App extends Component {
       });
   };
 
+  //This function is used to clear out 
+  //the token from the local storage
+  //allowing the user to log out of the app
   destroySession = () => {
     window.localStorage.clear();
     this.setState({
@@ -158,7 +182,6 @@ export default class App extends Component {
     console.log(this.state.token)
     console.log(this.state.isLoggedin)
   }
-
 
   render() {
     return (
@@ -180,6 +203,7 @@ export default class App extends Component {
                 handleApplyChange={this.handleApplyChange}
                 handleApplySubmit={this.handleApplySubmit}
                 closeJobModal={this.closeJobModal}
+                isLoggedin={this.state.isLoggedin}
               /> : null
           }
           {
@@ -196,17 +220,6 @@ export default class App extends Component {
                 closeSignUpModal={this.closeSignUpModal}
               /> : null
           }
-          {/* <Register
-            showSignUp={this.state.showSignUp}
-            handleRegisterChange={this.handleRegisterChange}
-            handleRegisterSubmit={this.handleRegisterSubmit}
-            isLoggedin={this.state.isLoggedin}
-            username={this.state.username}
-            password={this.state.password}
-            name={this.state.name}
-            baseURL={this.state.baseURL}
-            userCreated={this.state.userCreated}
-          /> */}
           <Route
             path="/" >
             <Home
