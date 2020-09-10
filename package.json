@@ -1,6 +1,15 @@
 {
   "name": "divercity_frontend_challenge",
   "version": "0.1.0",
+  "engines": {
+    "node": "14.3.0",
+    "npm": "6.14.5"
+  },
+  "buildpacks": [
+    {
+      "url": "mars/create-react-app"
+    }
+  ],
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
