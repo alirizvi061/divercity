@@ -53,6 +53,7 @@ class Home extends Component {
             <p>Location: {job.location}</p>
             <p>Description: {job.description}</p>
             <p>Skills: {job.skills_tag}</p>
+            <button onClick={() => { this.props.showJobModal() }}>APPLY</button>
         </div>
     }
 

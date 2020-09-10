@@ -3,6 +3,7 @@ import axios from "axios";
 import { BrowserRouter, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
+import Jobmodal from './components/Jobmodal';
 import Register from './components/Register';
 
 import './App.css';
@@ -14,6 +15,7 @@ export default class App extends Component {
     this.state = {
       token: null,
       showSignUpModal: false,
+      showJobModal: false,
       isLoggedin: false,
       userCreated: false,
       username: "",
@@ -22,7 +24,7 @@ export default class App extends Component {
       baseURL: "https://divercity-test.herokuapp.com/",
       registerMethod: "register",
       loginMethod: "login",
-
+      applyMethod: "jobs/2/apply"
     }
   }
 
@@ -40,6 +42,19 @@ export default class App extends Component {
     })
   }
 
+  showJobModal = () => {
+    console.log("Job modal clicked")
+    this.setState({
+      showJobModal: true
+    })
+  }
+
+  closeJobModal = () => {
+    console.log("close Job modal clicked")
+    this.setState({
+      showJobModal: false
+    })
+  }
 
   handleRegisterChange = (event) => {
     this.setState({
@@ -104,12 +119,53 @@ export default class App extends Component {
     });
   }
 
+  handleApplyChange = (event) => {
+    this.setState({
+      [event.currentTarget.id]: event.currentTarget.value
+    })
+  }
+
+  handleApplySubmit = (event) => {
+    event.preventDefault();
+    axios
+      .post(this.state.baseURL + this.state.applyMethod, {
+        username: this.state.username,
+        password: this.state.password,
+        name: this.state.name,
+      })
+      .then((res) => {
+        console.log(res)
+        this.setState({
+          username: "",
+          password: "",
+          name: "",
+          isLoggedin: true,
+          userCreated: true
+        });
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  destroySession = () => {
+    window.localStorage.clear();
+    this.setState({
+      token: null,
+      isLoggedin: false
+    })
+    console.log(this.state.token)
+    console.log(this.state.isLoggedin)
+  }
+
 
   render() {
     return (
       <>
         <BrowserRouter>
           <Navbar
+            destroySession={this.destroySession}
             handleLoginChange={this.handleLoginChange}
             handleLoginSubmit={this.handleLoginSubmit}
             showSignUpModal={this.showSignUpModal}
@@ -118,6 +174,14 @@ export default class App extends Component {
             username={this.state.username}
             password={this.state.password}
           />
+          {
+            this.state.showJobModal
+              ? <Jobmodal
+                handleApplyChange={this.handleApplyChange}
+                handleApplySubmit={this.handleApplySubmit}
+                closeJobModal={this.closeJobModal}
+              /> : null
+          }
           {
             this.state.showSignUpModal
               ? <Register
@@ -146,6 +210,8 @@ export default class App extends Component {
           <Route
             path="/" >
             <Home
+              closeJobModal={this.closeJobModal}
+              showJobModal={this.showJobModal}
               isLoggedin={this.state.isLoggedin}
             />
           </Route>
