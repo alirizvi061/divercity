@@ -12,15 +12,18 @@ class Home extends Component {
             jobs: [],
             baseURL: "https://divercity-test.herokuapp.com/",
             method: "jobs",
-            search: ""
+            searchTitle: "",
+            searchLocation: "",
+            searchSkills: ""
+
         }
     }
 
     //Job information is pulled automatically on load and is displayed on screen
     //for this API and APP I'll be using Axios calls instead of fetch because it's cleaner code 
     //and easy to read
-    componentDidMount() {
-        axios
+    async componentDidMount() {
+        const call = await axios
             .get(this.state.baseURL + this.state.method)
             .then((res) => {
                 this.setState({
@@ -32,18 +35,33 @@ class Home extends Component {
             .catch(error => {
                 console.log("empty input", error)
             })
+        return call;
     }
 
     //This handleChange function is there to let the user manipulate the state of "Search"
     handleChange = (event) => {
-        this.setState({ search: event.target.value });
+        this.setState({ [event.target.id]: event.target.value });
 
     }
 
     renderSearch = (job, index) => {
-        const search = this.state.search;
+        const search = this.state.searchTitle;
+        const searchLocation = this.state.searchLocation;
+        const searchSkills = this.state.searchSkills;
 
         if (search !== " " && job.title.toLowerCase().indexOf(search.toLowerCase()) === -1) {
+            console.log(job.location)
+            return null
+        }
+
+        if (job.location !== undefined) {
+            if (searchLocation !== " " && job.location.toLowerCase().indexOf(searchLocation.toLowerCase()) === -1) {
+                return null
+            }
+        }
+
+        if (searchSkills !== " " && job.skills_tag.toString().toLowerCase().indexOf(searchSkills.toLowerCase()) === -1) {
+            console.log(job.skills_tag)
             return null
         }
 
@@ -68,7 +86,9 @@ class Home extends Component {
                         <option value="location">Location</option>
                         <option value="skills">Skills</option> */}
                     {/* </select> */}
-                    <input type="text" name="search" placeholder="location, job type, skills..." onChange={this.handleChange} />
+                    <input type="text" name="search" id="searchTitle" placeholder="Title" onChange={this.handleChange} />
+                    <input type="text" name="search" id="searchLocation" placeholder="Location" onChange={this.handleChange} />
+                    <input type="text" name="search" id="searchSkills" placeholder="Skills" onChange={this.handleChange} />
                 </form>
                 <div className="jobDescription">
                     {this.state.jobs.map((job, index) => {

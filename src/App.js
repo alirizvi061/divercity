@@ -84,14 +84,16 @@ export default class App extends Component {
       })
       .then((res) => {
         console.log(res)
+        // this.closeSignUpModal()
         this.setState({
           username: "",
           password: "",
           name: "",
           isLoggedin: true,
-          userCreated: true
+          userCreated: true,
+          showSignUpModal: false,
         });
-        console.log(res);
+        console.log(res)
       })
       .catch((err) => {
         console.log(err);
@@ -172,6 +174,9 @@ export default class App extends Component {
         }
       })
       .then((res) => {
+        this.setState({
+          showJobModal: false,
+        })
         console.log(res)
       })
       .catch((err) => {
