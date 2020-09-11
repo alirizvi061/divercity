@@ -30,7 +30,6 @@ class Home extends Component {
                     jobs: res.data.jobs,
                     loading: false
                 })
-                // console.log(this.state.jobs)
             })
             .catch(error => {
                 console.log("empty input", error)
@@ -56,7 +55,6 @@ class Home extends Component {
         const searchSkills = this.state.searchSkills;
 
         if (search !== " " && job.title.toLowerCase().indexOf(search.toLowerCase()) === -1) {
-            console.log(job.location)
             return null
         }
 
@@ -67,7 +65,6 @@ class Home extends Component {
         }
 
         if (searchSkills !== " " && job.skills_tag.toString().toLowerCase().indexOf(searchSkills.toLowerCase()) === -1) {
-            console.log(job.skills_tag)
             return null
         }
 

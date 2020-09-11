@@ -3,6 +3,12 @@
 
 This project is a simple job listing app that allows the user to see job postings and apply to them. The user must be signed up and logged in to apply to the positions. The job postings were made available thanks to the API provided by the Divercity team's [API](https://documenter.getpostman.com/view/9521172/SzKVPxUg?version=latest) 
 
+### `Technologies Used`
+
+1. ReactJS
+2. Axios Calls
+3. Divercity API
+
 ### `How to use the app`
 
 First and foremost we want to open the app. 

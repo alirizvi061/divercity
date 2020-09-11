@@ -43,7 +43,6 @@ export default class App extends Component {
 
   //Open signup modal
   showSignUpModal = () => {
-    console.log("modal clicked")
     this.setState({
       showSignUpModal: true,
       loginErrorMessage: ""
@@ -52,7 +51,6 @@ export default class App extends Component {
 
   //Close signup modal
   closeSignUpModal = () => {
-    console.log("close modal clicked")
     this.setState({
       showSignUpModal: false,
       errorMessage: "",
@@ -62,7 +60,6 @@ export default class App extends Component {
 
   //open Jobs modal to apply 
   showJobModal = () => {
-    console.log("Job modal clicked")
     this.setState({
       showJobModal: true,
       loginErrorMessage: ""
@@ -71,7 +68,6 @@ export default class App extends Component {
 
   //close the jobs modal
   closeJobModal = () => {
-    console.log("close Job modal clicked")
     this.setState({
       showJobModal: false,
       loginErrorMessage: ""
@@ -97,7 +93,6 @@ export default class App extends Component {
           name: this.state.Rname,
         })
         .then((res) => {
-          console.log(res)
           this.setState({
             Rusername: "",
             Rpassword: "",
@@ -107,10 +102,9 @@ export default class App extends Component {
             showSignUpModal: false,
             errorMessage: "",
           });
-          console.log(res)
         })
         .catch((err) => {
-          console.log(err);
+          alert(err);
         });
     } else {
       this.setState({
@@ -142,11 +136,8 @@ export default class App extends Component {
           password: this.state.password,
         })
         .then((res) => {
-          console.log(res)
           if (res.status === 200) {
             let data = res.data.token
-            let username = res.config.data
-            console.log(username)
             this.setState({
               token: data,
               isLoggedin: true,
@@ -157,7 +148,7 @@ export default class App extends Component {
           }
         })
         .catch((err) => {
-          console.log(err);
+          alert(err);
         });
       this.setState({
         username: "",
@@ -207,10 +198,9 @@ export default class App extends Component {
             applyErrorMessage: ""
 
           })
-          console.log(res)
         })
         .catch((err) => {
-          console.log(err);
+          alert(err);
         });
     } else {
       this.setState({
@@ -228,8 +218,6 @@ export default class App extends Component {
       token: null,
       isLoggedin: false
     })
-    console.log(this.state.token)
-    console.log(this.state.isLoggedin)
   }
 
   render() {
