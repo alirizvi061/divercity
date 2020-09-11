@@ -31,9 +31,10 @@ export default class Jobmodal extends Component {
 
                                         <textarea className="textbox" placeholder="Paste your cover letter here" value={this.props.value} id="cover_letter" onChange={this.props.handleApplyChange}></textarea>
 
-                                        {this.props.loginErrorMessage}<br />
+                                        {this.props.applyErrorMessage}<br />
 
                                         <input className="button" type="submit" />
+
 
                                     </form >
 
@@ -57,6 +58,9 @@ export default class Jobmodal extends Component {
                                     {this.props.loginErrorMessage}<br />
 
                                     <input className="button" type="submit" value="Log In" />
+
+                                    <button className="signUpButtonModal" onClick={() => { this.props.showSignUpModal() }}
+                                    >Sign up</button>
 
                                 </form>
 

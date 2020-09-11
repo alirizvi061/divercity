@@ -32,6 +32,7 @@ export default class App extends Component {
       cover_letter: "",
       errorMessage: "",
       loginErrorMessage: "",
+      applyErrorMessage: "",
       baseURL: "https://divercity-test.herokuapp.com/",
       registerMethod: "register",
       loginMethod: "login",
@@ -203,7 +204,7 @@ export default class App extends Component {
         .then((res) => {
           this.setState({
             showJobModal: false,
-            loginErrorMessage: ""
+            applyErrorMessage: ""
 
           })
           console.log(res)
@@ -213,7 +214,7 @@ export default class App extends Component {
         });
     } else {
       this.setState({
-        loginErrorMessage: "Please input text in both fields to continue!"
+        applyErrorMessage: "Please input text in both fields to continue!"
       })
     }
   };
@@ -263,6 +264,7 @@ export default class App extends Component {
                 motivation={this.state.motivation}
                 cover_letter={this.state.cover_letter}
                 loginErrorMessage={this.state.loginErrorMessage}
+                applyErrorMessage={this.state.applyErrorMessage}
               /> : null
           }
           {

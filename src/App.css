@@ -1,4 +1,4 @@
-/* Body CSS */
+/* BODY CSS */
 body{
  background-color: #ffff;
 }
@@ -9,6 +9,7 @@ body{
   flex-direction: column;
 }
 
+/* JOB DESCRIPTION BOX LAYOUT */
 .jobInfo{
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
     0 5px 40px 4px rgba(0, 0, 0, 0.56), 0 0 0 1px rgba(0, 0, 0, 0.3); /*shadow effect*/
@@ -19,30 +20,25 @@ body{
   margin: 4%;
 }
 
+/* MARGIN OF THE HOME PAGE */
 .jobPage{
   margin: 10%;
 }
 
-.jobSkills{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
+/* MARGIN FOR THE HOME PAGE HEADINGS */
 .jobHeading{
   margin: 40px;
 }
 
+/* CSS FOR THE JOB FILTER SEARCH BARS */
 .jobSearchform{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-
-/* NAVBAR CSS AREA */
+/* NAVBAR CSS */
 .navbar{
-  padding-top: 10px;
-  padding-bottom: 10px;
   position: fixed;
   top: 0;
   display: flex;
@@ -60,17 +56,21 @@ body{
   text-decoration: none;
   padding-left: 50px;
   font-size: 25px;
-  margin: 6px;
 }
 
+/* NAVBAR LOGIN CONTAINER, HOLDS SIGN UP BUTTON TOO */
 .loginContainer{
   display: flex;
+  padding-top: 15px;
 }
+
+/* THIS DIV HOLDS THE LOGIN FORM AND IT'S ERROR MESSAGE IN THE NAV BAR */
 .login{
   display: flex;
   flex-direction: column;
 }
 
+/* CSS FOR MOST BUTTONS WITH SOME EXCEPTIONS*/
 .button{
   font-size: 16px;
   padding: 12px 20px;  
@@ -81,6 +81,7 @@ body{
   text-decoration: none;
 }
 
+/* NAV BAR SIGNUP BUTTON EXCEPTION CSS SLIGHTLY DIFFERENT */
 .signUpButton{
   font-size: 16px;
   padding: 12px 20px;  
@@ -93,23 +94,41 @@ body{
   margin-right: 2%;
 }
 
-.button:hover, .signUpButton:hover{
+/* LOGIN MODAL SIGNUP BUTTON EXCEPTION CSS SLIGHTLY DIFFERENT */
+.signUpButtonModal{
+  margin-left: 5px;
+  font-size: 16px;
+  padding: 12px 20px;  
+  width: 100px;
+  height: 42px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  text-decoration: none;
+}
+
+/* HOVER OVER PROPS FOR ALL BUTTONS */
+.button:hover, .signUpButton:hover, .signUpButtonModal:hover {
   cursor: pointer;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
     0 5px 30px 1px rgba(96, 93, 93, 0.56), 0 0 0 1px rgba(63, 61, 61, 0.3);
 }
 
+/* CSS FOR ALL INPUT=TEXT BOXES */
 input[type=text] {
   width: 33%;
   padding: 12px 20px;
   box-sizing: border-box;
 }
+
+/* CSS FOR ALL INPUT=PASSWORD BOXES */
 input[type=password] {
   width: 33%;
   padding: 12px 20px;
-  margin-left: 1%;
   box-sizing: border-box;
 }
+
+/* CSS FOR ALL INPUT=TEXTAREA BOXES */
 input[type=textarea] {
   width: 20%;
   padding: 12px 20px;
@@ -117,7 +136,7 @@ input[type=textarea] {
   box-sizing: border-box;
 }
 
-/* SIGN UP MODAL  */
+/* SIGN UP MODAL CSS */
 .modal {
   z-index: 1; 
   left: 0;
@@ -128,14 +147,13 @@ input[type=textarea] {
   padding-top: 200px; 
   height: 100%; 
   background-color: rgb(0,0,0); 
-  /* border-top: 70px solid gray; */
   background-color: rgba(0, 0, 0, 0.954); 
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
     0 22px 70px 4px rgba(0, 0, 0, 0.56), 0 0 0 1px rgba(0, 0, 0, 0.3); /*shadow effect*/
   text-align: center;
 }
 
-/* Modal Content */
+/* ALL MODAL CONTENT*/
 .modal-content {
   border-radius: 8px;
   background-color: #f2bdbd;
@@ -145,17 +163,19 @@ input[type=textarea] {
   width: 50%;
 }
 
+/* TEXTAREA BOX CSS */
 textarea {
-  width: 100%;
-  height: 150px;
   padding: 12px 20px;
-  box-sizing: border-box;
+  resize: none;
+  width: 100%;
   border: 2px solid #ccc;
+  height: 150px;
   border-radius: 4px;
   background-color: #f8f8f8;
-  resize: none;
+  box-sizing: border-box;
 }
-/* The Close Button */
+
+/* THE X (CLOSE) BUTTON CSS */
 .close {
   color: #aaaaaa;
   float: right;
@@ -163,6 +183,7 @@ textarea {
   font-weight: bold;
 }
 
+/* THE X (CLOSE) BUTTON:HOVER CSS */
 .close:hover,
 .close:focus {
   color: #000;
@@ -170,16 +191,14 @@ textarea {
   cursor: pointer;
 }
 
-/* FOOTER */
-
+/* FOOTER CSS */
 .footer{
   position: relative;
   align-items: center;
  
 }
 
-/* MEDIA QUERIES */
-
+/* MEDIA QUERIES AREA*/
 @media only screen and (max-width: 800px){
   .jobPage{
     margin-top: 30%;
