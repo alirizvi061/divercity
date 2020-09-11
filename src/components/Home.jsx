@@ -4,7 +4,7 @@ import axios from "axios";
 
 class Home extends Component {
 
-    //State for the Job information
+    //State for the incoming Job information
     constructor(props) {
         super(props);
         this.state = {
@@ -44,7 +44,13 @@ class Home extends Component {
 
     }
 
+    //This function shows the individual job postings
+    //it has if else statements that allow for the filtering
+    //user can filter using a job's Title, Location, and Skills 
+    //this function also renders the apply to job button
+    //this button open the job application modal
     renderSearch = (job, index) => {
+
         const search = this.state.searchTitle;
         const searchLocation = this.state.searchLocation;
         const searchSkills = this.state.searchSkills;
@@ -78,23 +84,38 @@ class Home extends Component {
 
     /*This is the area where job information will be displayed */
     render() {
+
         return (
+
             <div className="jobPage">
+
                 <div className="jobHeading">
+
                     <h1 className="jobH1">Featured Jobs</h1>
+
                     <h3 className="jobH3">Filter jobs by:</h3>
+
                     <form className="jobSearchform">
+
                         <input type="text" name="search" id="searchTitle" placeholder="Title" onChange={this.handleChange} />
+
                         <input type="text" name="search" id="searchLocation" placeholder="Location" onChange={this.handleChange} />
+
                         <input type="text" name="search" id="searchSkills" placeholder="Skills" onChange={this.handleChange} />
+
                     </form>
+
                 </div>
+
                 <div className="jobDescription">
+                    {/* This embedded JS calls the renderSearch function with the result from the jobs.map as a parameter  */}
                     {this.state.jobs.map((job, index) => {
-                        return this.renderSearch(job, index) /* This embedded JS calls the renderSearch function with the result from the jobs.map as a parameter */
+                        return this.renderSearch(job, index)
                     })
                     }
+
                 </div>
+
             </div >
         )
     }
