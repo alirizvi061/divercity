@@ -43,7 +43,8 @@ export default class App extends Component {
   showSignUpModal = () => {
     console.log("modal clicked")
     this.setState({
-      showSignUpModal: true
+      showSignUpModal: true,
+      loginErrorMessage: ""
     })
   }
 
@@ -53,6 +54,7 @@ export default class App extends Component {
     this.setState({
       showSignUpModal: false,
       errorMessage: "",
+      loginErrorMessage: ""
     })
   }
 
@@ -60,7 +62,8 @@ export default class App extends Component {
   showJobModal = () => {
     console.log("Job modal clicked")
     this.setState({
-      showJobModal: true
+      showJobModal: true,
+      loginErrorMessage: ""
     })
   }
 
@@ -68,7 +71,8 @@ export default class App extends Component {
   closeJobModal = () => {
     console.log("close Job modal clicked")
     this.setState({
-      showJobModal: false
+      showJobModal: false,
+      loginErrorMessage: ""
     })
   }
 
@@ -185,24 +189,32 @@ export default class App extends Component {
   //authenticate the user
   handleApplySubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(this.state.baseURL + this.state.applyMethod, {
-        motivation: this.state.motivation,
-        cover_letter: this.state.cover_letter,
-      }, {
-        headers: {
-          'Authorization': `${localStorage.getItem('token')}`
-        }
-      })
-      .then((res) => {
-        this.setState({
-          showJobModal: false,
+    if (this.state.motivation !== "" && this.state.cover_letter !== "") {
+      axios
+        .post(this.state.baseURL + this.state.applyMethod, {
+          motivation: this.state.motivation,
+          cover_letter: this.state.cover_letter,
+        }, {
+          headers: {
+            'Authorization': `${localStorage.getItem('token')}`
+          }
         })
-        console.log(res)
+        .then((res) => {
+          this.setState({
+            showJobModal: false,
+            loginErrorMessage: ""
+
+          })
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      this.setState({
+        loginErrorMessage: "Please input text in both fields to continue!"
       })
-      .catch((err) => {
-        console.log(err);
-      });
+    }
   };
 
   //This function is used to clear out 
@@ -227,6 +239,7 @@ export default class App extends Component {
             handleLoginChange={this.handleLoginChange}
             handleLoginSubmit={this.handleLoginSubmit}
             showSignUpModal={this.showSignUpModal}
+            showJobModal={this.state.showJobModal}
             showSignUp={this.state.showSignUp}
             isLoggedin={this.state.isLoggedin}
             username={this.state.username}
@@ -248,6 +261,7 @@ export default class App extends Component {
                 password={this.state.password}
                 motivation={this.state.motivation}
                 cover_letter={this.state.cover_letter}
+                loginErrorMessage={this.state.loginErrorMessage}
               /> : null
           }
           {

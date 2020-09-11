@@ -23,7 +23,8 @@ export default class Navbar extends Component {
 
                                 <button className="signUpButton" onClick={() => { this.props.showSignUpModal() }}
                                 >Sign up</button>
-                            </div > : <button className="signUpButton" onClick={() => { this.props.destroySession() }}>Log Out</button>
+                            </div > :
+                            <button className="signUpButton" onClick={() => { this.props.destroySession() }}>Log Out</button>
                     }
                 </div >
             </>
