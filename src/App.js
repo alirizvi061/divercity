@@ -23,16 +23,22 @@ export default class App extends Component {
       isLoggedin: false,
       userCreated: false,
       username: "",
+      Rusername: "", //Created a second set of states for Registration
       password: "",
-      name: "",
+      Rpassword: "", //was creating a bug for Login 
+      Rname: "",
       motivation: "",
       cover_letter: "",
+      errorMessage: "",
+      loginErrorMessage: "",
       baseURL: "https://divercity-test.herokuapp.com/",
       registerMethod: "register",
       loginMethod: "login",
       applyMethod: "jobs/2/apply"
     }
   }
+
+
   //Open signup modal
   showSignUpModal = () => {
     console.log("modal clicked")
@@ -45,7 +51,8 @@ export default class App extends Component {
   closeSignUpModal = () => {
     console.log("close modal clicked")
     this.setState({
-      showSignUpModal: false
+      showSignUpModal: false,
+      errorMessage: "",
     })
   }
 
@@ -75,31 +82,37 @@ export default class App extends Component {
   //This function sends a post requests that user makes using the sign up form
   //when successful this function allows user's information to be entered into the database
   handleRegisterSubmit = (event) => {
-    console.log(this.state.baseURL)
     event.preventDefault();
-    axios
-      .post(this.state.baseURL + this.state.registerMethod, {
-        username: this.state.username,
-        password: this.state.password,
-        name: this.state.name,
-      })
-      .then((res) => {
-        console.log(res)
-        // this.closeSignUpModal()
-        this.setState({
-          username: "",
-          password: "",
-          name: "",
-          isLoggedin: true,
-          userCreated: true,
-          showSignUpModal: false,
+    if (this.state.Rusername !== "" && this.state.Rpassword !== "" && this.state.Rname !== "") {
+      axios
+        .post(this.state.baseURL + this.state.registerMethod, {
+          username: this.state.Rusername,
+          password: this.state.Rpassword,
+          name: this.state.Rname,
+        })
+        .then((res) => {
+          console.log(res)
+          this.setState({
+            Rusername: "",
+            Rpassword: "",
+            Rname: "",
+            isLoggedin: true,
+            userCreated: true,
+            showSignUpModal: false,
+            errorMessage: "",
+          });
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        console.log(res)
+    } else {
+      this.setState({
+        errorMessage: "Please complete all fields before signing up!"
       })
-      .catch((err) => {
-        console.log(err);
-      });
+    }
   };
+
 
   //This function handles changes made to the login form
   handleLoginChange = (event) => {
@@ -108,7 +121,7 @@ export default class App extends Component {
     })
   }
 
-  //This functino handles the submission of the user's login information
+  //This function handles the submission of the user's login information
   //if this is correct it allows the user to be able to use the 
   //apply to job feature in the app
   //it also saves the jsonwebtoken in the user's local storage
@@ -116,32 +129,40 @@ export default class App extends Component {
   //this token is sent back to the server when applying for jobs
   handleLoginSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(this.state.baseURL + this.state.loginMethod, {
-        username: this.state.username,
-        password: this.state.password,
-      })
-      .then((res) => {
-        console.log(res)
-        if (res.status === 200) {
-          let data = res.data.token
-          let username = res.config.data
-          console.log(username)
-          this.setState({
-            token: data,
-            isLoggedin: true,
-          })
-          localStorage.setItem('token', data)
-          localStorage.setItem('username', data)
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+    if (this.state.username !== "" && this.state.password !== "") {
+      axios
+        .post(this.state.baseURL + this.state.loginMethod, {
+          username: this.state.username,
+          password: this.state.password,
+        })
+        .then((res) => {
+          console.log(res)
+          if (res.status === 200) {
+            let data = res.data.token
+            let username = res.config.data
+            console.log(username)
+            this.setState({
+              token: data,
+              isLoggedin: true,
+              loginErrorMessage: "",
+            })
+            localStorage.setItem('token', data)
+            localStorage.setItem('username', data)
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      this.setState({
+        username: "",
+        password: "",
+        loginErrorMessage: "",
       });
-    this.setState({
-      username: "",
-      password: "",
-    });
+    } else {
+      this.setState({
+        loginErrorMessage: "Username/Password empty!"
+      })
+    }
   }
 
   componentDidMount() {
@@ -210,6 +231,7 @@ export default class App extends Component {
             isLoggedin={this.state.isLoggedin}
             username={this.state.username}
             password={this.state.password}
+            loginErrorMessage={this.state.loginErrorMessage}
           />
           {
             this.state.showJobModal
@@ -234,12 +256,13 @@ export default class App extends Component {
                 handleRegisterChange={this.handleRegisterChange}
                 handleRegisterSubmit={this.handleRegisterSubmit}
                 isLoggedin={this.state.isLoggedin}
-                username={this.state.username}
-                password={this.state.password}
-                name={this.state.name}
+                Rusername={this.state.Rusername}
+                Rpassword={this.state.Rpassword}
+                Rname={this.state.Rname}
                 baseURL={this.state.baseURL}
                 userCreated={this.state.userCreated}
                 closeSignUpModal={this.closeSignUpModal}
+                errorMessage={this.state.errorMessage}
               /> : null
           }
           <Route

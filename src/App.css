@@ -2,6 +2,7 @@
 body{
  background-color: #ffff;
 }
+
 /* JOB DESCRIPTION PAGE CSS AREA */
 .jobDescription{
   display: flex;
@@ -17,9 +18,11 @@ body{
   padding: 15px;
   margin: 4%;
 }
+
 .jobPage{
   margin: 10%;
 }
+
 .jobSkills{
   display: flex;
   flex-direction: column;
@@ -34,6 +37,8 @@ body{
   flex-direction: row;
   justify-content: space-around;
 }
+
+
 /* NAVBAR CSS AREA */
 .navbar{
   padding-top: 10px;
@@ -50,15 +55,21 @@ body{
 }
 
 /* NAVBAR LOGIN FORM SETUP CSS */
-.navbarLogo{
+#navbarLogo { 
+  color: white;
+  text-decoration: none;
   padding-left: 50px;
   font-size: 25px;
   margin: 6px;
 }
+
 .loginContainer{
   display: flex;
 }
-
+.login{
+  display: flex;
+  flex-direction: column;
+}
 
 .button{
   font-size: 16px;
@@ -68,12 +79,6 @@ body{
   color: white;
   border: none;
   text-decoration: none;
-}
-
-.button:hover, .signUpButton:hover{
-  cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    0 5px 30px 1px rgba(96, 93, 93, 0.56), 0 0 0 1px rgba(63, 61, 61, 0.3);
 }
 
 .signUpButton{
@@ -87,6 +92,13 @@ body{
   text-decoration: none;
   margin-right: 2%;
 }
+
+.button:hover, .signUpButton:hover{
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 5px 30px 1px rgba(96, 93, 93, 0.56), 0 0 0 1px rgba(63, 61, 61, 0.3);
+}
+
 input[type=text] {
   width: 33%;
   padding: 12px 20px;
@@ -163,4 +175,13 @@ textarea {
   position: relative;
   align-items: center;
  
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 800px){
+  .jobPage{
+    margin-top: 30%;
+    margin-left: 0;
+  }
 }
