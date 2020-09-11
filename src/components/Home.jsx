@@ -65,31 +65,30 @@ class Home extends Component {
             return null
         }
 
-        return <div className="job" key={index}>
-            <p>Title: {job.title}</p>
+        return <div className="jobInfo" key={index}>
+            <h3>{job.title}</h3>
             <p>Company: {job.company}</p>
             <p>Location: {job.location}</p>
             <p>Description: {job.description}</p>
-            <p>Skills: {job.skills_tag}</p>
-            <button onClick={() => { this.props.showJobModal() }}>APPLY</button>
+            <p>Skills:</p>
+            <p classname="jobSkills">{job.skills_tag}</p>
+            <button className="button" onClick={() => { this.props.showJobModal() }}>APPLY</button>
         </div>
     }
 
+    /*This is the area where job information will be displayed */
     render() {
         return (
-            <div>
-                <h1>Job Listing</h1> {/*This is the area where job information will be displayed */}
-                <form className="form">
-                    {/* <label for="key">Choose search type:</label>
-                    <select name="key" id="cars">
-                        <option value="title">Title</option>
-                        <option value="location">Location</option>
-                        <option value="skills">Skills</option> */}
-                    {/* </select> */}
-                    <input type="text" name="search" id="searchTitle" placeholder="Title" onChange={this.handleChange} />
-                    <input type="text" name="search" id="searchLocation" placeholder="Location" onChange={this.handleChange} />
-                    <input type="text" name="search" id="searchSkills" placeholder="Skills" onChange={this.handleChange} />
-                </form>
+            <div className="jobPage">
+                <div className="jobHeading">
+                    <h1 className="jobH1">Featured Jobs</h1>
+                    <h3 className="jobH3">Filter jobs by:</h3>
+                    <form className="jobSearchform">
+                        <input type="text" name="search" id="searchTitle" placeholder="Title" onChange={this.handleChange} />
+                        <input type="text" name="search" id="searchLocation" placeholder="Location" onChange={this.handleChange} />
+                        <input type="text" name="search" id="searchSkills" placeholder="Skills" onChange={this.handleChange} />
+                    </form>
+                </div>
                 <div className="jobDescription">
                     {this.state.jobs.map((job, index) => {
                         return this.renderSearch(job, index) /* This embedded JS calls the renderSearch function with the result from the jobs.map as a parameter */

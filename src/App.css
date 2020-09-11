@@ -1,61 +1,147 @@
+/* Body CSS */
 body{
-  margin: 10%;
+ background-color: #ffff;
 }
+/* JOB DESCRIPTION PAGE CSS AREA */
 .jobDescription{
   display: flex;
   flex-direction: column;
 }
-.job{
-  border: 1px solid black;
+
+.jobInfo{
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 5px 40px 4px rgba(0, 0, 0, 0.56), 0 0 0 1px rgba(0, 0, 0, 0.3); /*shadow effect*/
+  border: 1px solid gray;
   margin: 10px;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 4%;
 }
+.jobPage{
+  margin: 10%;
+}
+.jobSkills{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.jobHeading{
+  margin: 40px;
+}
+
+.jobSearchform{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+/* NAVBAR CSS AREA */
 .navbar{
+  padding-top: 10px;
+  padding-bottom: 10px;
   position: fixed;
   top: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0px;
   border: 1px solid black;
-  width: 80vw;
+  width: 99vw;
   color: white;
-  background: black;
+  background: rgb(56, 56, 208);
 }
-.form{
-  margin-top: 15px;
+
+/* NAVBAR LOGIN FORM SETUP CSS */
+.navbarLogo{
+  padding-left: 50px;
+  font-size: 25px;
+  margin: 6px;
 }
 .loginContainer{
   display: flex;
-  flex-direction: column;
+}
+
+
+.button{
+  font-size: 16px;
+  padding: 12px 20px;  
+  width: 100px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  text-decoration: none;
+}
+
+.button:hover, .signUpButton:hover{
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 5px 30px 1px rgba(96, 93, 93, 0.56), 0 0 0 1px rgba(63, 61, 61, 0.3);
+}
+
+.signUpButton{
+  font-size: 16px;
+  padding: 12px 20px;  
+  width: 100px;
+  height: 40px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  text-decoration: none;
+  margin-right: 2%;
+}
+input[type=text] {
+  width: 33%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+input[type=password] {
+  width: 33%;
+  padding: 12px 20px;
+  /* margin: 2%; */
+  box-sizing: border-box;
+}
+input[type=textarea] {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 2%;
+  box-sizing: border-box;
 }
 
 /* SIGN UP MODAL  */
 .modal {
-  z-index: 1; /* Sit on top */
+  z-index: 1; 
   left: 0;
   top: 0;
-  overflow: auto; /* Enable scroll if needed */
-  position: fixed; /* Stay in place */
-  width: 100%; /* Full width */
-  padding-top: 200px; /* Location of the box */
-  height: 100%; /* Full height */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  overflow: auto; 
+  position: fixed; 
+  width: 100%; 
+  padding-top: 200px; 
+  height: 100%; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    0 22px 70px 4px rgba(0, 0, 0, 0.56), 0 0 0 1px rgba(0, 0, 0, 0.3);
+    0 22px 70px 4px rgba(0, 0, 0, 0.56), 0 0 0 1px rgba(0, 0, 0, 0.3); /*shadow effect*/
   text-align: center;
 }
 
 /* Modal Content */
 .modal-content {
-  border-radius: 15px;
+  border-radius: 8px;
   background-color: #f2bdbd;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 50%;
 }
 
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}
 /* The Close Button */
 .close {
   color: #aaaaaa;
@@ -69,4 +155,12 @@ body{
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* FOOTER */
+
+.footer{
+  position: relative;
+  align-items: center;
+ 
 }

@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Jobmodal from './components/Jobmodal';
 import Register from './components/Register';
+import Footer from './components/Footer';
 import './App.css';
 
 export default class App extends Component {
@@ -127,7 +128,6 @@ export default class App extends Component {
           let username = res.config.data
           console.log(username)
           this.setState({
-            username: username,
             token: data,
             isLoggedin: true,
           })
@@ -249,6 +249,7 @@ export default class App extends Component {
               showJobModal={this.showJobModal}
               isLoggedin={this.state.isLoggedin}
             />
+            <Footer />
           </Route>
         </BrowserRouter>
       </>
